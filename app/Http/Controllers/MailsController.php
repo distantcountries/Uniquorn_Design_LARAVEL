@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail;
+use App\Mail\MailRecieved;
 
 class MailsController extends Controller
 {
@@ -29,8 +30,8 @@ class MailsController extends Controller
 
         $mail->save();
         
+        \Mail::to('uniquorn.design@gmail.com')->send(new MailRecieved($mail));
         return $mail;
-        // return Mail::create($request->all());
     }
 
 }

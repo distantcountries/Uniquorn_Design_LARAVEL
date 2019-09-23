@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Newsletter;
+use App\Mail\NewsletterSubscribed;
 
 class NewslettersController extends Controller
 {
@@ -26,7 +27,7 @@ class NewslettersController extends Controller
 
         $newsletter->save();
         
+        \Mail::to($newsletter->email)->send(new NewsletterSubscribed($newsletter));
         return $newsletter;
-        // return Newsletter::create($request->all());
     }
 }
